@@ -8,12 +8,10 @@ public class RandomWord {
     public static void main(String[] args) {
         String champion = null;
         int i = 1;
-        while (true){
+        while (!StdIn.isEmpty()) {
             String s = StdIn.readString();
-            if (StdRandom.bernoulli(1.0 / (double)i))
+            if (StdRandom.bernoulli(1.0 / (double) i))
                 champion = s;
-            if (!StdIn.isEmpty())
-                break;
             i++;
         }
         StdOut.println(champion);
