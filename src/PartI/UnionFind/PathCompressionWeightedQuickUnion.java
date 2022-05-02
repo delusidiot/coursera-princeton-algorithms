@@ -1,4 +1,8 @@
-package unionfind;
+package PartI.UnionFind;
+
+import edu.princeton.cs.algs4.StdOut;
+
+import java.util.Arrays;
 
 /**
  * Balance by linking root of smaller tree to root of larger tree.
@@ -7,7 +11,7 @@ package unionfind;
  * union O(lg N)
  * find O(lg N)
  */
-public class WeightedQuickUnion implements UnionFind{
+public class PathCompressionWeightedQuickUnion implements UnionFind{
     private final int[] id;
     private final int[] sz;
     private int size;
@@ -17,7 +21,7 @@ public class WeightedQuickUnion implements UnionFind{
      * set sz of zero
      * @param N array accesses
      */
-    public WeightedQuickUnion(int N) {
+    public PathCompressionWeightedQuickUnion(int N) {
         id = new int[N];
         sz = new int[N];
         for (int i = 0; i < N; i++)
@@ -27,12 +31,15 @@ public class WeightedQuickUnion implements UnionFind{
 
     /**
      * chase parent pointers until reach root
+     * Make every other node in path point to its grandparent(thereby halving path length)
      * @param i depth of i array accesses
      * @return root value
      */
     private int root(int i) {
-        while (i != id [i])
-            i = id [i];
+        while (i != id [i]) {
+            id[i] = id[id[i]];
+            i = id[i];
+        }
         return i;
     }
 
@@ -54,6 +61,11 @@ public class WeightedQuickUnion implements UnionFind{
     @Override
     public int count() {
         return this.size;
+    }
+
+    @Override
+    public void printId() {
+        StdOut.println(Arrays.toString(id));
     }
 
     /**

@@ -1,6 +1,8 @@
-package unionfind;
+package PartI.UnionFind;
 
 import edu.princeton.cs.algs4.StdOut;
+
+import java.util.Arrays;
 
 /**
  * quick-find
@@ -62,14 +64,8 @@ public class QuickFindUF implements UnionFind {
         }
     }
 
-    public static void main(String[] args) {
-        UnionFind quickFind = new QuickFindUF(10);
-        StdOut.println(quickFind.count());
-        StdOut.println(quickFind.connected(0, 1));
-        quickFind.union(0, 1);
-        StdOut.println(quickFind.connected(0, 1));
-        StdOut.println(quickFind.find(0));
-        StdOut.println(quickFind.find(1));
-        StdOut.println(quickFind.count());
+    @Override
+    public void printId() {
+        StdOut.println(Arrays.toString(id));
     }
 }

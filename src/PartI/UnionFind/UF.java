@@ -1,4 +1,4 @@
-package unionfind;
+package PartI.UnionFind;
 
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
@@ -10,10 +10,18 @@ import edu.princeton.cs.algs4.StdOut;
  */
 public class UF {
 
+    private final int[] id;
+
+    private int size;
+
     /**
      * @param N initialize union-find data structure with N objects(0 to N-1)
      */
     public UF(int N) {
+        id = new int[N];
+        for (int i = 0; i < N; i++)
+            id[i] = i;
+        size = N;
     }
 
     /**
@@ -22,6 +30,13 @@ public class UF {
      * @param q node
      */
     public void union(int p, int q){
+        id[p] = id[q];
+    }
+
+    private int root(int i) {
+        while (i != id[i])
+            i = id[i];
+        return i;
     }
 
     /**
@@ -31,7 +46,7 @@ public class UF {
      * @return same component
      */
     public boolean connected(int p, int q) {
-        return true;
+        return root(p) == root(q);
     }
 
     /**
@@ -39,7 +54,7 @@ public class UF {
      * @return find node index
      */
     int find(int p) {
-        return 0;
+        return root(p);
     }
 
     /**
